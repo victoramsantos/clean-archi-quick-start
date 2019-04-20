@@ -15,19 +15,19 @@ import static java.util.stream.Collectors.toSet;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class GuiaDTO {
+public class GuiaDto {
 
     private Long id;
     private String name;
 
-    public static Set<GuiaDTO> fromEntity(Set<Guia> guias) {
+    public static Set<GuiaDto> fromEntity(Set<Guia> guias) {
         return guias
                 .stream()
-                .map(GuiaDTO::fromEntity)
+                .map(GuiaDto::fromEntity)
                 .collect(toSet());
     }
 
-    public static GuiaDTO fromEntity(Guia guia) {
+    public static GuiaDto fromEntity(Guia guia) {
         return builder()
                 .id(guia.getId())
                 .name(guia.getName())

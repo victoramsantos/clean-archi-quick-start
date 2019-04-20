@@ -1,6 +1,6 @@
-package com.example;
+package com.example.controller;
 
-import com.example.dto.GuiaDTO;
+import com.example.dto.GuiaDto;
 import com.example.dto.GenericListDTO;
 import com.example.entities.Guia;
 import com.example.exception.DtoParserException;
@@ -23,10 +23,10 @@ public class GuiaController {
     }
 
     @PostMapping
-    public @ResponseBody ResponseEntity save(@RequestBody GuiaDTO dto) {
+    public @ResponseBody ResponseEntity save(@RequestBody GuiaDto dto) {
         try{
             dto.sanitize();
-            GuiaDTO created = GuiaDTO.fromEntity(guiaService.save(dto.toEntity()));
+            GuiaDto created = GuiaDto.fromEntity(guiaService.save(dto.toEntity()));
             return ResponseEntity.status(HttpStatus.CREATED).body(created);
         } catch(DataValidationException exception){
             return ResponseEntity.status(exception.getHttpStatus()).body(exception.getMessage());
@@ -36,7 +36,7 @@ public class GuiaController {
     }
 
     @PutMapping
-    public @ResponseBody ResponseEntity update(@RequestBody GuiaDTO guiaDTO) {
+    public @ResponseBody ResponseEntity update(@RequestBody GuiaDto guiaDTO) {
         try{
             Guia result = guiaService.update(guiaDTO.toEntity());
             return ResponseEntity.status(HttpStatus.OK).body(guiaDTO.fromEntity(result));
@@ -58,7 +58,7 @@ public class GuiaController {
     @GetMapping("/{id}")
     public @ResponseBody ResponseEntity findById(@PathVariable Long id) {
         try{
-            GuiaDTO guiaDTO =  GuiaDTO.fromEntity(guiaService.findById(id));
+            GuiaDto guiaDTO =  GuiaDto.fromEntity(guiaService.findById(id));
             return ResponseEntity.status(HttpStatus.OK).body(guiaDTO);
         }catch (DataValidationException exception){
             return ResponseEntity.status(exception.getHttpStatus()).body(exception.getMessage());
@@ -66,10 +66,10 @@ public class GuiaController {
     }
 
     @GetMapping
-    public @ResponseBody ResponseEntity<GenericListDTO<GuiaDTO>> list() {
+    public @ResponseBody ResponseEntity<GenericListDTO<GuiaDto>> list() {
         Set<Guia> set =  guiaService.list();
 
-        GenericListDTO<GuiaDTO> response = new GenericListDTO(GuiaDTO.fromEntity(set));
+        GenericListDTO<GuiaDto> response = new GenericListDTO(GuiaDto.fromEntity(set));
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 }

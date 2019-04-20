@@ -10,14 +10,13 @@ import org.springframework.stereotype.Service;
 import java.util.Set;
 
 @Service
-public class BookService implements GenericService<Book> {
+public class BookService{
 
     private DataAccess<Book> dataAccess;
     public BookService(DataAccess<Book> dataAccess) {
         this.dataAccess = dataAccess;
     }
 
-    @Override
     public Book save(Book elem) throws DataValidationException {
         if(elem.getName().isEmpty()) throw new EmptyParameterException("Book can't has an empty name");
         if(elem.getAuthor().isEmpty()) throw new EmptyParameterException("Book can't has an empty author");
@@ -27,7 +26,6 @@ public class BookService implements GenericService<Book> {
         return dataAccess.save(elem);
     }
 
-    @Override
     public Book update(Book elem) throws DataValidationException {
         Book found = dataAccess
                 .findById(elem.getId())
@@ -41,7 +39,6 @@ public class BookService implements GenericService<Book> {
         return dataAccess.save(found);
     }
 
-    @Override
     public void delete(Long id) throws DataValidationException {
         Book found = dataAccess
                 .findById(id)
@@ -50,14 +47,12 @@ public class BookService implements GenericService<Book> {
         dataAccess.delete(found);
     }
 
-    @Override
     public Book findById(Long id) throws DataValidationException {
         return dataAccess
                 .findById(id)
                 .orElseThrow(() -> new ElementNotFoundException("Book not found with id " + id));
     }
 
-    @Override
     public Set<Book> list() {
         return dataAccess.list();
     }

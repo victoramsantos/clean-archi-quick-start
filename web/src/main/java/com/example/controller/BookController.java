@@ -1,11 +1,10 @@
-package com.example;
+package com.example.controller;
 
 import com.example.dto.BookDto;
 import com.example.entities.Book;
 import com.example.exception.DtoParserException;
 import com.example.exception.DataValidationException;
 import com.example.service.BookService;
-import com.example.service.GenericService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +14,7 @@ import java.util.Set;
 @RestController
 @RequestMapping("/books")
 public class BookController {
-    private final GenericService<Book> service;
+    private final BookService service;
     public BookController(BookService service) {
         this.service = service;
     }
