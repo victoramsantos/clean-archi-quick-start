@@ -5,8 +5,9 @@ repositories {
 }
 
 dependencies {
+    compile group: 'com.google.code.gson', name: 'gson', version: '2.7'
     compile group: 'org.springframework', name: 'spring-context', version: '5.1.5.RELEASE'
-        
+
     testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '2.1.2.RELEASE'
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
