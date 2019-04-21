@@ -1,6 +1,7 @@
 package com.example.service;
 
 import com.example.entities.BookLoan;
+import com.example.exception.BusinessInvalidException;
 import com.example.exception.DataValidationException;
 import com.example.exception.ElementNotFoundException;
 import com.example.repository.DataAccess;
@@ -12,21 +13,27 @@ import java.util.Set;
 public class BookLoanService {
 
     private DataAccess<BookLoan> dataAccess;
-    public BookLoanService(DataAccess<BookLoan> dataAccess) {
+    private BookService bookService;
+    public BookLoanService(DataAccess<BookLoan> dataAccess, BookService bookService) {
         this.dataAccess = dataAccess;
+        this.bookService = bookService;
     }
 
     public BookLoan save(BookLoan elem) throws DataValidationException {
-        //TODO Check the amount of books before make the loan
+        elem.setBook(bookService.makeLoan(elem.getBook()));
         return dataAccess.save(elem);
     }
 
-    public void delete(Long id) throws DataValidationException {
+    public BookLoan updateStatus(Long id) throws DataValidationException {
         BookLoan found = dataAccess
                 .findById(id)
                 .orElseThrow(() -> new ElementNotFoundException("No book loan found with id " + id));
 
-        dataAccess.delete(found);
+        if(!found.isUpdatable()) throw new BusinessInvalidException("This loan has been returned");
+
+        found.setBook(bookService.makeReturn(found.getBook()));
+        found.makeReturn();
+        return dataAccess.save(found);
     }
 
     public BookLoan findById(Long id) throws DataValidationException {

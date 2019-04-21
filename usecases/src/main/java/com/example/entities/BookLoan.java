@@ -14,7 +14,11 @@ public class BookLoan {
     @Getter @Setter private String createdAt;
     @Builder.Default @Getter private LoanStatus status = LoanStatus.ONGOING;
 
-    public void setToInactive() {
-        status = LoanStatus.RETURNED;
+    public boolean isUpdatable() {
+        return status.equals(LoanStatus.ONGOING);
+    }
+
+    public void makeReturn() {
+        this.status = LoanStatus.RETURNED;
     }
 }

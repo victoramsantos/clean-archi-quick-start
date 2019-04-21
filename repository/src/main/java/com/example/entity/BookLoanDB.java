@@ -20,10 +20,10 @@ public class BookLoanDB {
     @SequenceGenerator(name="bookloan_generator", sequenceName = "bookloan_seq")
     @Getter @Setter private Long id;
 
-    @OneToOne
+    @ManyToOne
     @Getter @Setter private GuiaDB guia;
 
-    @OneToOne
+    @ManyToOne
     @Getter @Setter private BookDB book;
 
     @CreatedDate

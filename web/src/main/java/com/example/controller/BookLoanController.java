@@ -51,6 +51,29 @@ public class BookLoanController {
         }
     }
 
+    @GetMapping("/{id}")
+    public @ResponseBody ResponseEntity findById(@PathVariable Long id) {
+        try{
+            BookLoan found = service.findById(id);
+            BookLoanDto callback = BookLoanDto.fromEntity(found);
+
+            return ResponseEntity.status(HttpStatus.OK).body(callback);
+        } catch(DataValidationException exception){
+            return ResponseEntity.status(exception.getHttpStatus()).body(exception.getMessage());
+        }
+    }
+
+    @PutMapping("/availability/{id}")
+    public @ResponseBody ResponseEntity updateAvailability(@PathVariable Long id) {
+        try{
+            BookLoan updated = service.updateStatus(id);
+            BookLoanDto callback = BookLoanDto.fromEntity(updated);
+
+            return ResponseEntity.status(HttpStatus.OK).body(callback);
+        } catch(DataValidationException exception){
+            return ResponseEntity.status(exception.getHttpStatus()).body(exception.getMessage());
+        }
+    }
 
     @GetMapping
     public @ResponseBody ResponseEntity<Set<BookLoanDto>> list() {

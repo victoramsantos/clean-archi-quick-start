@@ -35,7 +35,9 @@ public class BookLoanDto {
         public static BookLoanDto fromEntity(BookLoan elem) {
         return builder()
                 .id(elem.getId())
+                .guiaId(elem.getGuia().getId())
                 .guia(GuiaDto.fromEntity(elem.getGuia()))
+                .bookId(elem.getBook().getId())
                 .book(BookDto.fromEntity(elem.getBook()))
                 .status(elem.getStatus().toString())
                 .createdAt(elem.getCreatedAt())

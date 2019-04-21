@@ -19,6 +19,8 @@ public class BookDB {
     @Getter @Setter private String author;
     @Getter @Setter private String synopsis;
     @Getter @Setter private String isbn;
+    @Getter @Setter private Integer amount;
+    @Getter @Setter private Integer available;
 
     public Book toEntity() {
         return Book.builder()
@@ -27,6 +29,8 @@ public class BookDB {
                 .author(author)
                 .synopsis(synopsis)
                 .isbn(isbn)
+                .amount(amount)
+                .available(available)
                 .build();
     }
 
@@ -37,6 +41,8 @@ public class BookDB {
                 .author(elem.getAuthor())
                 .synopsis(elem.getSynopsis())
                 .isbn(elem.getIsbn())
+                .amount(elem.getAmount())
+                .available(elem.getAvailable())
                 .build();
     }
 }

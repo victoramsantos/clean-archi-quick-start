@@ -21,6 +21,8 @@ public class BookDto {
     private String author;
     private String synopsis;
     private String isbn;
+    private Integer amount;
+    private Integer available;
 
     public static Set<BookDto> fromEntity(Set<Book> books) {
         return books
@@ -36,6 +38,8 @@ public class BookDto {
                 .author(book.getAuthor())
                 .synopsis(book.getSynopsis())
                 .isbn(book.getIsbn())
+                .amount(book.getAmount())
+                .available(book.getAvailable())
                 .build();
     }
 
@@ -46,6 +50,8 @@ public class BookDto {
                 .author(author)
                 .synopsis(synopsis)
                 .isbn(isbn)
+                .amount(amount)
+                .available(available)
                 .build();
     }
 
@@ -54,6 +60,8 @@ public class BookDto {
         if(author == null) throw new DtoParserException("Author can't be null");
         if(synopsis == null) throw new DtoParserException("Synopsis can't be null");
         if(isbn == null) throw new DtoParserException("Isbn can't be null");
+        if(amount == null) throw new DtoParserException("Amount can't be null");
+        if(available == null) throw new DtoParserException("Available can't be null");
         return true;
     }
 }

@@ -27,12 +27,15 @@ public class BookLoanDataAcessImpl implements DataAccess<BookLoan> {
 
     @Override
     public Optional<BookLoan> findById(Long id) {
-        return Optional.empty();
+        return repository
+                .findById(id)
+                .map(BookLoanDB::toEntity);
     }
 
     @Override
     public void delete(BookLoan elem) {
-
+        BookLoanDB db = BookLoanDB.fromEntity(elem);
+        repository.delete(db);
     }
 
     @Override
