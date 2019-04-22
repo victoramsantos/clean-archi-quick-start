@@ -1,7 +1,5 @@
 package com.example.repository;
 
-import com.example.entities.Guia;
-
 import java.util.Optional;
 import java.util.Set;
 

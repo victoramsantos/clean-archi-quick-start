@@ -28,9 +28,9 @@ public class SwaggerConfig extends WebMvcConfigurationSupport {
 
     private ApiInfo metaData() {
         return new ApiInfoBuilder()
-                .title("Quick Start Clean Architecture REST API")
-                .description("\"Spring Boot REST API for management of users\"")
-                .contact(new Contact("Adriano Ribeiro", "", "adrianolucianoribeiro@gmail.com"))
+                .title("Gb Library using Clena Architecture")
+                .description("\"Spring Boot REST API for a library management\"")
+                .contact(new Contact("Victor Amorim", "", "victor.amsantos@gmail.com"))
                 .version("1.0.0")
                 .license("Apache License Version 2.0")
                 .licenseUrl("https://www.apache.org/licenses/LICENSE-2.0\"")

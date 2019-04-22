@@ -8,6 +8,6 @@ public class UserTest {
 
     @Before
     public void setUp() {
-        user = User.builder().id("1").build();
+        user = User.builder().id(1L).build();
     }
 }

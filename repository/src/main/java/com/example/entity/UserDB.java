@@ -31,29 +31,23 @@ public class UserDB {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_generator")
     @SequenceGenerator(name="user_generator", sequenceName = "usr_seq")
     @Getter @Setter private Long id;
+    @Getter @Setter private String username;
+    @Getter @Setter private String password;
 
-    @Getter @Setter private String name;
-
-    @Getter @Setter private String adress;
-
-    @Builder.Default
-    @Enumerated(EnumType.STRING)
-    @Getter @Setter private UserStatusDB status = UserStatusDB.ACTIVE;
 
     public User toEntity() {
         return User.builder()
-                .id(id.toString())
-                .name(name)
-                .adress(adress)
+                .id(id)
+                .username(username)
+                .password(password)
                 .build();
     }
 
     public static UserDB fromEntity(User user) {
         return builder()
-                .id(isEmpty(user.getId()) ? null : valueOf(user.getId()))
-                .name(user.getName())
-                .adress(user.getAdress())
-                .status(UserStatusDB.fromEntity(user.getStatus()))
+                .id(user.getId())
+                .username(user.getUsername())
+                .password(user.getPassword())
                 .build();
     }
 }
